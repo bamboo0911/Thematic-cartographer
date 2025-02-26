@@ -1,0 +1,149 @@
+/* 動畫和過渡效果 */
+
+/* Smooth transition for content area */
+.content-transition {
+    transition: all 0.3s ease;
+  }
+  
+  /* 確保展開時的平滑過渡 */
+  .category {
+    transition: all 0.3s ease;
+    will-change: transform, width, height, left, right, margin;
+    backface-visibility: hidden;
+  }
+  
+  /* 折疊內容的過渡效果 */
+  #familiarityControlContent {
+    transition: all 0.3s ease;
+  }
+  
+  /* 拖放項的過渡效果 */
+  .topic-item {
+    transition: all 0.2s ease;
+  }
+  
+  .topic-color-left,
+  .topic-color-right,
+  .topic-title {
+    transition: all 0.3s ease;
+  }
+  
+  /* 按鈕 hover 效果 */
+  .btn-primary:hover {
+    transform: translateY(-1px);
+  }
+  
+  .btn-icon:hover svg {
+    transform: scale(1.1);
+  }
+  
+  /* 滑塊拖動動畫 */
+  .familiarity-slider-input::-webkit-slider-thumb {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .familiarity-slider-input::-webkit-slider-thumb:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 5px rgba(28, 22, 12, 0.2);
+  }
+  
+  /* 主題項目展開/收起動畫 */
+  .topic-item[data-expanded="true"] .topic-title,
+  .topic-item[data-expanded="false"] .topic-title {
+    transition: padding 0.3s ease, font-weight 0.2s ease, white-space 0.1s ease 0.2s;
+  }
+  
+  .topic-item[data-expanded="true"] .topic-color-left,
+  .topic-item[data-expanded="true"] .topic-color-right {
+    transition: opacity 0.3s ease, width 0.3s ease 0.1s;
+  }
+  
+  /* 卡片 hover 效果 */
+  .card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+  
+  /* 分類容器展開動畫 */
+  .category:hover {
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 0 0 2px var(--bg-secondary), 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* 分類容器內的主題標籤動畫 */
+  .topics-container {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  
+  .category:hover .topics-container {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .category:not(:hover) .topics-container {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  
+  /* 確認按鈕狀態變更動畫 */
+  #confirmFamiliarity {
+    transition: background-color 0.2s ease, transform 0.2s ease, color 0.2s ease;
+  }
+  
+  /* 滾動條過渡效果 */
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    transition: background-color 0.2s ease;
+  }
+  
+  /* 主題項目拖曳時的視覺效果 */
+  .topic-item.dragging {
+    opacity: 0.5;
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    z-index: 20;
+  }
+  
+  /* 拖放目標高亮效果 */
+  .category.drag-over {
+    background-color: var(--bg-hover);
+    transform: scale(1.02);
+  }
+  
+  /* 折疊按鈕旋轉動畫 */
+  #toggleFamiliarityControl svg {
+    transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  }
+  
+  /* 導航和標題轉場效果 */
+  header {
+    transition: box-shadow 0.3s ease, background-color 0.3s ease;
+  }
+  
+  header:hover {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  }
+  
+  .heading-primary,
+  .heading-secondary,
+  .heading-tertiary {
+    transition: color 0.2s ease, transform 0.2s ease;
+  }
+  
+  .heading-primary:hover,
+  .heading-secondary:hover,
+  .heading-tertiary:hover {
+    color: var(--primary-light);
+  }
+  
+  /* 圖表區域過渡效果 */
+  #chart-container {
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+  
+  #chart-container:hover {
+    background-color: var(--bg-hover);
+  }

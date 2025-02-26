@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thematic Cartographer</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700;900&family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap"
+    />
+
+    <!-- Tailwind CSS (with plugins) -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- 自訂樣式表 -->
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/animations.css" />
+  </head>
+  <body class="min-h-screen flex flex-col overflow-x-hidden bg-white font-body">
+    <!-- Main Page Container -->
+    <div class="flex grow flex-col">
+      <!-- Header -->
+      <header class="flex items-center justify-between border-b border-bg-secondary px-10 py-3">
+        <div class="flex items-center gap-4 text-primary">
+          <!-- Logo or Icon -->
+          <div class="w-4 h-4">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M24 4H6V17.3333V30.6667H24V44H42V30.6667V17.3333H24V4Z" fill="currentColor"/>
+            </svg>
+          </div>
+          <h2 class="text-lg font-bold leading-tight tracking-[-0.015em] text-primary">
+            Thematic Cartographer
+          </h2>
+        </div>
+      </header>
+
+      <!-- Layout: Left Control Panel + Right Main Content -->
+      <main class="flex flex-1 justify-center py-6 px-8 gap-8" role="main">
+        <!-- Left Side: Control Panel -->
+        <aside class="w-2/5 flex flex-col">
+          <h2 class="heading-primary text-center mb-md">Control Panel</h2>
+
+          <!-- Topic Recommendation Section -->
+          <section class="card mb-md">
+            <div class="card-header">
+              <h3 class="card-title">Topic Recommendation</h3>
+            </div>
+            
+            <div class="p-md pt-xs">
+              <!-- 標題列 -->
+              <div class="grid grid-cols-4 mb-xs">
+                <div class="col-span-1 text-center text-small">相關度 A</div>
+                <div class="col-span-2 text-center text-small">主題</div>
+                <div class="col-span-1 text-center text-small">相關度 B</div>
+              </div>
+              
+              <!-- 相關度軸 -->
+              <div class="grid grid-cols-4 mb-md relative">
+                <!-- 中央原點標記 -->
+                <div class="absolute inset-x-0 top-0 flex justify-center items-center">
+                  <div class="w-1 h-4 bg-primary-lighter"></div>
+                </div>
+                
+                <!-- 相關度 A 軸 -->
+                <div class="col-span-2 flex justify-end">
+                  <div class="w-full relative h-4 pl-2">
+                    <div class="absolute inset-y-0 left-2 right-0 bg-gradient-to-l from-transparent via-positive-lighter to-positive-light rounded-l-sm"></div>
+                    <div class="absolute inset-y-0 right-0 flex items-center justify-end">
+                      <span class="text-xs text-primary font-medium pr-1">0</span>
+                    </div>
+                    <div class="absolute inset-y-0 left-2 flex items-center justify-start">
+                      <span class="text-xs text-white font-medium pl-1">1</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- 相關度 B 軸 -->
+                <div class="col-span-2 flex justify-start">
+                  <div class="w-full relative h-4 pr-2">
+                    <div class="absolute inset-y-0 left-0 right-2 bg-gradient-to-r from-transparent via-negative-lighter to-negative-light rounded-r-sm"></div>
+                    <div class="absolute inset-y-0 left-0 flex items-center justify-start">
+                      <span class="text-xs text-primary font-medium pl-1">0</span>
+                    </div>
+                    <div class="absolute inset-y-0 right-2 flex items-center justify-end">
+                      <span class="text-xs text-white font-medium pr-1">1</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- 列表容器 -->
+            <div id="topics-list-container" class="bg-secondary rounded-lg p-md pt-0 min-h-[150px] max-h-[250px] overflow-y-auto custom-scrollbar">
+              <div class="space-y-sm">
+                <!-- 主題列表項目將由 JavaScript 動態插入 -->
+              </div>
+            </div>
+          </section>
+          
+          <!-- Familiarity Control Section -->
+          <section class="card">
+            <!-- 標題和折疊按鈕 -->
+            <div class="card-header">
+              <h3 class="card-title">Familiarity Control</h3>
+              
+              <div class="flex items-center gap-sm">
+                <button id="confirmFamiliarity" class="btn-primary">
+                  Confirm
+                </button>
+                
+                <button id="toggleFamiliarityControl" class="btn-icon" aria-label="Toggle Familiarity Control">
+                  <svg class="w-5 h-5 text-primary transition-transform duration-300 transform group-data-[collapsed=true]:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            
+            <!-- 可折疊的內容區域 -->
+            <div id="familiarityControlContent" class="card-body transition-all duration-300 origin-top overflow-visible">
+              <!-- 更新分類容器設計 -->
+              <div class="categories-container grid grid-cols-12 gap-2 mt-4">
+                <!-- Anchor Topics - 調整寬度比例 -->
+                <div id="maintain" class="category category-anchor col-span-3">
+                  <div class="category-header">
+                    <h3 class="category-title">Anchor Topics</h3>
+                    <span class="category-counter topic-count">0</span>
+                  </div>
+                  <div class="category-content">
+                    <!-- Topics will be added here dynamically -->
+                  </div>
+                </div>
+                
+                <!-- Positive Topics - 調整寬度比例 -->
+                <div id="strengthen" class="category category-positive col-span-4">
+                  <div class="category-header">
+                    <h3 class="category-title">Positive Topics</h3>
+                    <span class="category-counter topic-count">0</span>
+                  </div>
+                  <div class="category-content">
+                    <!-- Topics will be added here dynamically -->
+                  </div>
+                </div>
+                
+                <!-- Negative Topics - 調整寬度比例 -->
+                <div id="weaken" class="category category-negative col-span-5">
+                  <div class="category-header">
+                    <h3 class="category-title">Negative Topics</h3>
+                    <span class="category-counter topic-count">0</span>
+                  </div>
+                  <div class="category-content">
+                    <!-- Topics will be added here dynamically -->
+                  </div>
+                </div>
+              </div>
+
+              <!-- 滑動軸部分 -->
+              <div id="degreeSlider" class="mt-md flex gap-md">
+                <div class="flex flex-col w-1/5">
+                  <div class="text-small font-medium text-center mb-sm">
+                    Familiarity
+                  </div>
+                  
+                  <div class="familiarity-slider">
+                    <div class="familiarity-slider-container">
+                      <input type="range" min="0" max="100" value="50" step="1" class="familiarity-slider-input">
+                    </div>
+                    
+                    <div class="familiarity-slider-labels">
+                      <span>High</span>
+                      <span>Low</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- 散佈圖容器 -->
+                <div class="w-4/5">
+                  <div class="scatter-container">
+                    <div class="scatter-header">
+                      <div class="flex items-center gap-sm">
+                        <h3 class="text-small font-medium text-primary">Documents Select</h3>
+                        <div class="w-1.5 h-1.5 rounded-full bg-primary-lighter"></div>
+                        <span class="text-xs text-primary-light">n=20</span>
+                      </div>
+                    </div>
+                    <canvas id="scatterPlot" class="w-full h-[100px]"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </aside>
+
+        <!-- Right Side: Result Monitor -->
+        <section class="w-3/5 flex flex-col">
+          <h2 class="heading-primary text-center mb-md">Result Monitor</h2>
+
+          <!-- Content Preview Area -->
+          <article class="card mb-md">
+            <div class="card-header">
+              <h4 class="card-title">Content Preview</h4s>
+            </div>
+
+            <!-- Text Container: Scrollable area -->
+            <div class="card-body">
+              <div id="content-text" class="content-fixed preview-text text-body">
+                <!-- 內容將由 JavaScript 動態插入 -->
+              </div>
+            </div>
+          </article>
+
+          <!-- Chart + Stats -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Topic Distribution</h3>
+            </div>
+
+            <div class="card-body">
+              <!-- Container: Chart with legend -->
+              <div class="flex">
+                <div id="chart-container" class="flex-grow border border-bg-secondary bg-secondary flex items-center justify-center p-md">
+                  <canvas id="topicDistributionChart" class="w-full h-full"></canvas>
+                </div>
+                <div class="ml-md flex flex-col justify-start">
+                  <h4 class="heading-tertiary mb-sm">Legend</h4>
+                  <ul>
+                    <li class="flex items-center mb-xs">
+                      <span class="inline-block w-4 h-4 bg-negative-light mr-sm"></span>Original
+                    </li>
+                    <li class="flex items-center">
+                      <span class="inline-block w-4 h-4 bg-positive-light mr-sm"></span>Current
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- JavaScript 文件 -->
+    <!-- 先載入工具和服務 -->
+    <script src="js/config.js"></script>
+    <script src="js/utils/messages.js"></script>
+    <script src="js/utils/domUtils.js"></script>
+    <script src="js/utils/dragDrop.js"></script>
+    <script src="js/services/mockData.js"></script>
+    <script src="js/services/dataService.js"></script>
+    
+    <!-- 再載入功能模組 -->
+    <script src="js/modules/topicManager.js"></script>
+    <script src="js/modules/categoryBox.js"></script>
+    <script src="js/modules/familiarityControl.js"></script>
+    <script src="js/modules/contentPreview.js"></script>
+    <script src="js/modules/charts.js"></script>
+    
+    <!-- 最後載入應用入口點 -->
+    <script src="js/main.js"></script>
+  </body>
+</html>

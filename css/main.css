@@ -1,0 +1,198 @@
+/* 設定全局變數 */
+:root {
+    /* 主色調 */
+    --primary-color: #1C160C;      /* 深棕色 - 用於主要文字和元素 */
+    --primary-light: rgba(28, 22, 12, 0.8);
+    --primary-lighter: rgba(28, 22, 12, 0.3);
+    
+    /* 輔助色 */
+    --positive-color: #019863;     /* 綠色 - 用於正面/增強主題 */
+    --positive-light: rgba(1, 152, 99, 0.8);
+    --positive-lighter: rgba(1, 152, 99, 0.5);
+    
+    --negative-color: #A18249;     /* 褐色 - 用於負面/減弱主題 */
+    --negative-light: rgba(161, 130, 73, 0.8);
+    --negative-lighter: rgba(161, 130, 73, 0.5);
+    
+    /* 背景和中性色 */
+    --bg-primary: #FFFFFF;         /* 白色 - 主要背景 */
+    --bg-secondary: #F4EFE6;       /* 米色 - 次要背景 */
+    --bg-hover: rgba(244, 239, 230, 0.6);  /* 懸停背景 */
+    
+    /* 字體家族 */
+    --font-heading: 'Plus Jakarta Sans', sans-serif;
+    --font-body: 'Noto Sans', sans-serif;
+    
+    /* 字體大小 */
+    --text-xs: 0.75rem;    /* 12px */
+    --text-sm: 0.875rem;   /* 14px */
+    --text-base: 1rem;     /* 16px */
+    --text-lg: 1.125rem;   /* 18px */
+    --text-xl: 1.25rem;    /* 20px */
+    --text-2xl: 1.5rem;    /* 24px */
+    --text-3xl: 1.75rem;   /* 28px */
+    --text-4xl: 2rem;      /* 32px */
+    
+    /* 字體粗細 */
+    --weight-normal: 400;
+    --weight-medium: 500;
+    --weight-bold: 700;
+    --weight-extrabold: 800;
+    
+    /* 間距變數 */
+    --spacing-xs: 0.25rem;         /* 4px */
+    --spacing-sm: 0.5rem;          /* 8px */
+    --spacing-md: 1rem;            /* 16px */
+    --spacing-lg: 1.5rem;          /* 24px */
+    --spacing-xl: 2rem;            /* 32px */
+  }
+  
+  /* 基礎樣式 */
+  body {
+    font-family: var(--font-body);
+    color: var(--primary-color);
+    line-height: 1.5;
+  }
+  
+  /* 標題樣式 */
+  .heading-primary {
+    font-family: var(--font-heading);
+    font-size: var(--text-3xl);
+    font-weight: var(--weight-bold);
+    color: var(--primary-color);
+    line-height: 1.2;
+  }
+  
+  .heading-secondary {
+    font-family: var(--font-heading);
+    font-size: var(--text-xl);
+    font-weight: var(--weight-bold);
+    color: var(--primary-color);
+    line-height: 1.3;
+  }
+  
+  .heading-tertiary {
+    font-family: var(--font-heading);
+    font-size: var(--text-lg);
+    font-weight: var(--weight-medium);
+    color: var(--primary-color);
+    line-height: 1.4;
+  }
+  
+  /* 正文樣式 */
+  .text-body {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    font-weight: var(--weight-normal);
+    color: var(--primary-color);
+    line-height: 1.5;
+  }
+  
+  .text-small {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-normal);
+    color: var(--primary-color);
+    line-height: 1.5;
+  }
+  
+  /* 間距工具類 */
+  .mt-xs { margin-top: var(--spacing-xs); }
+  .mt-sm { margin-top: var(--spacing-sm); }
+  .mt-md { margin-top: var(--spacing-md); }
+  .mt-lg { margin-top: var(--spacing-lg); }
+  .mt-xl { margin-top: var(--spacing-xl); }
+  
+  .mb-xs { margin-bottom: var(--spacing-xs); }
+  .mb-sm { margin-bottom: var(--spacing-sm); }
+  .mb-md { margin-bottom: var(--spacing-md); }
+  .mb-lg { margin-bottom: var(--spacing-lg); }
+  .mb-xl { margin-bottom: var(--spacing-xl); }
+  
+  .p-xs { padding: var(--spacing-xs); }
+  .p-sm { padding: var(--spacing-sm); }
+  .p-md { padding: var(--spacing-md); }
+  .p-lg { padding: var(--spacing-lg); }
+  .p-xl { padding: var(--spacing-xl); }
+  
+  /* 內容預覽區域 */
+  .content-fixed {
+    width: 100%;
+    height: 300px;          
+    overflow-y: auto;       
+    overflow-x: hidden;     
+    position: relative;
+  }
+  
+  /* 預覽文字樣式 */
+  .preview-text {
+    text-align: justify;
+    white-space: pre-wrap;   
+  }
+  
+  /* Chart.js 容器 */
+  #chart-container {
+    position: relative;
+    width: 100%;
+    height: 200px; 
+  }
+  
+  /* 自定義滾動條樣式 */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+    border-radius: 3px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: var(--primary-lighter);
+    border-radius: 3px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-light);
+  }
+  
+  /* 自定義橫向捲軸樣式 */
+  .topics-container::-webkit-scrollbar {
+    height: 4px;
+  }
+  
+  .topics-container::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 2px;
+  }
+  
+  .topics-container::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 2px;
+  }
+  
+  .topics-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  .focus-container {
+    position: relative;
+  }
+  
+  .focus-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 0 2px var(--positive-lighter);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+  
+  .focus-container:focus-within::after {
+    opacity: 1;
+  }
