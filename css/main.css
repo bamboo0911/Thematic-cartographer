@@ -45,6 +45,20 @@
     --spacing-md: 1rem;            /* 16px */
     --spacing-lg: 1.5rem;          /* 24px */
     --spacing-xl: 2rem;            /* 32px */
+    
+    /* 相關度 A (正面) 階梯色 */
+    --positive-color-1: rgba(1, 152, 99, 0.2);  /* 極低 */
+    --positive-color-2: rgba(1, 152, 99, 0.4);  /* 低 */
+    --positive-color-3: rgba(1, 152, 99, 0.6);  /* 中 */
+    --positive-color-4: rgba(1, 152, 99, 0.8);  /* 高 */
+    --positive-color-5: rgba(1, 152, 99, 1.0);  /* 極高 */
+    
+    /* 相關度 B (負面) 階梯色 */
+    --negative-color-1: rgba(161, 130, 73, 0.2);  /* 極低 */
+    --negative-color-2: rgba(161, 130, 73, 0.4);  /* 低 */
+    --negative-color-3: rgba(161, 130, 73, 0.6);  /* 中 */
+    --negative-color-4: rgba(161, 130, 73, 0.8);  /* 高 */
+    --negative-color-5: rgba(161, 130, 73, 1.0);  /* 極高 */
   }
   
   /* 基礎樣式 */

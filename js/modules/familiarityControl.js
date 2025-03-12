@@ -1,86 +1,62 @@
-// js/modules/familiarityControl.js
+// js/modules/familiarityControl.js - 極簡版
 const FamiliarityControl = {
-    // 當前熟悉度值
-    currentFamiliarity: 50,
-    isFirstClick: true,
+  // 當前熟悉度值
+  currentFamiliarity: 50,
+  
+  // 初始化
+  init() {
+    // 獲取DOM元素
+    this.slider = document.querySelector('input[type="range"]');
+    this.confirmButton = document.getElementById('confirmFamiliarity');
+    this.toggleButton = document.getElementById('toggleFamiliarityControl');
+    this.content = document.getElementById('familiarityControlContent');
     
-    // 初始化
-    init() {
-      // 獲取DOM元素
-      this.slider = document.querySelector('input[type="range"]');
-      this.confirmButton = document.getElementById('confirmFamiliarity');
-      this.toggleButton = document.getElementById('toggleFamiliarityControl');
-      this.content = document.getElementById('familiarityControlContent');
-      
-      // 設置初始值
-      this.currentFamiliarity = parseInt(this.slider.value);
-      
-      // 更新滑塊視覺效果
-      this.updateSliderVisual();
-      
-      // 設置事件監聽
-      this.setupEvents();
-      
-      return this;
-    },
+    // 設置初始值
+    this.currentFamiliarity = parseInt(this.slider.value);
     
-    // 設置事件監聽
-    setupEvents() {
-      // 滑塊變更事件
-      this.slider.addEventListener('input', e => {
-        this.currentFamiliarity = parseInt(e.target.value);
-        this.updateSliderVisual();
-      });
-      
-      // 確認按鈕點擊事件
-      this.confirmButton.addEventListener('click', async () => {
-        if (this.isFirstClick) {
-          this.confirmButton.textContent = 'Update';
-          this.isFirstClick = false;
-        }
-        
-        // 獲取並顯示文件
-        try {
-          const documents = await DataService.getDocumentsByFamiliarity(this.currentFamiliarity);
-          sendMessage('familiarity-updated', {
-            level: this.currentFamiliarity,
-            documents: documents
-          });
-        } catch (error) {
-          console.error('獲取文件失敗:', error);
-        }
-      });
-      
-      // 折疊按鈕點擊事件
-      this.toggleButton.addEventListener('click', () => {
-        const isCollapsed = this.toggleButton.dataset.collapsed === 'true';
-        this.toggleFamiliarityControl(!isCollapsed);
-      });
-    },
+    // 設置事件監聽 - 極簡版
+    this.setupEvents();
     
-    // 更新滑塊視覺效果
-    updateSliderVisual() {
-      const percentage = (this.currentFamiliarity - this.slider.min) / 
-                        (this.slider.max - this.slider.min) * 100;
-      
-      this.slider.style.background = 
-        `linear-gradient(to right, var(--range-color) 0%, var(--range-color) ${percentage}%, #F4EFE6 ${percentage}%, #F4EFE6 100%)`;
-    },
+    return this;
+  },
+  
+  // 設置事件監聽
+  setupEvents() {
+    // 使用超級節流的滑塊變更事件
+    this.slider.addEventListener('change', e => {
+      // 只在釋放滑塊時更新值，而不是在拖動過程中
+      this.currentFamiliarity = parseInt(e.target.value);
+    });
     
-    // 切換折疊狀態
-    toggleFamiliarityControl(collapse) {
-      if (collapse) {
-        this.content.style.maxHeight = '0';
-        this.content.style.opacity = '0';
-        this.content.style.marginTop = '0';
-        this.content.classList.add('collapsed');
-        this.toggleButton.dataset.collapsed = 'true';
-      } else {
-        this.content.style.maxHeight = this.content.scrollHeight + 'px';
-        this.content.style.opacity = '1';
-        this.content.style.marginTop = '1rem';
-        this.content.classList.remove('collapsed');
-        this.toggleButton.dataset.collapsed = 'false';
+    // 確認按鈕點擊事件 - 簡化為只在點擊時獲取數據
+    this.confirmButton.addEventListener('click', async () => {
+      try {
+        // 移除視覺更新，只保留數據處理
+        const documents = await DataService.getDocumentsByFamiliarity(this.currentFamiliarity);
+        sendMessage('familiarity-updated', {
+          level: this.currentFamiliarity,
+          documents: documents
+        });
+      } catch (error) {
+        console.error('獲取文件失敗:', error);
       }
+    });
+    
+    // 折疊按鈕點擊事件 - 極簡化
+    this.toggleButton.addEventListener('click', () => {
+      // 簡化為直接切換 display 樣式
+      this.toggleFamiliarityControl(this.content.classList.contains('collapsed'));
+    });
+  },
+  
+  // 切換折疊狀態 - 優化版本
+  toggleFamiliarityControl(collapse) {
+    if (collapse) {
+      this.content.style.display = 'none';
+      this.toggleButton.dataset.collapsed = 'true';
+    } else {
+      this.content.style.display = 'block';
+      this.toggleButton.dataset.collapsed = 'false';
     }
-  };
+  }
+};
