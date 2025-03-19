@@ -10,9 +10,15 @@ document.addEventListener('DOMContentLoaded', async function() {
     
     // 2. 初始化其他模組
     CategoryBox.init();
-    FamiliarityControl.init();
-    ContentPreview.init();
     Charts.init();
+    
+    // Initialize the new ScatterPlot module
+    if (typeof ScatterPlot !== 'undefined') {
+      console.log('Initializing ScatterPlot module from main.js');
+      ScatterPlot.init();
+    } else {
+      console.error('ScatterPlot module not found. Make sure js/modules/scatterPlot.js is included in your HTML.');
+    }
     
     console.timeEnd('App Initialization');
     console.log('應用程式初始化成功');

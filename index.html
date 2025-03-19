@@ -24,6 +24,8 @@
     <link rel="stylesheet" href="css/main.css" />
     <link rel="stylesheet" href="css/components.css" />
     <link rel="stylesheet" href="css/animations.css" />
+    <link rel="stylesheet" href="css/content-preview.css" />
+
   </head>
   <body class="min-h-screen flex flex-col overflow-x-hidden bg-white font-body">
     <!-- Main Page Container - 移除了 header -->
@@ -176,49 +178,88 @@
           </div>
         </aside>
 
-        <!-- Right Side: Result Monitor -->
+        <!-- 右側：結果監控 -->
         <section class="w-3/5 flex flex-col h-full">
           <h2 class="heading-primary text-center my-2">Result Monitor</h2>
 
-          <!-- 使用 flex 容器包裝結果區塊 -->
-          <div class="flex flex-col flex-1">
-            <!-- Content Preview Area -->
-            <article class="card flex-grow mb-3" style="flex: 2; display: flex; flex-direction: column; overflow: hidden;">
-              <div class="card-header py-sm shrink-0">
-                <h4 class="card-title text-lg">Content Preview</h4>
-              </div>
+          <!-- 內容預覽區域 - 與主題推薦高度匹配 -->
+          <article class="card flex-grow mb-3" style="flex: 2; display: flex; flex-direction: column; overflow: hidden;">
+            <div class="card-header py-sm shrink-0">
+              <h3 class="card-title text-lg">Content Preview</h3>
+            </div>
 
-              <!-- Text Container: Scrollable area -->
-              <div class="card-body p-sm flex-1">
-                <div id="content-text" class="h-full overflow-y-auto preview-text text-body">
-                  <!-- 內容將由 JavaScript 動態插入 -->
+            <div class="card-body p-sm flex-1">
+              <div class="content-preview-container">
+                <!-- 垂直滑動器容器 -->
+                <div id="vertical-scale-container" class="vertical-slider-container">
+                  <div class="axis-label">A</div>
+                  
+                  <div class="slider-wrapper">
+                    <input 
+                      type="range" 
+                      id="vertical-slider" 
+                      class="vertical-slider"
+                      min="0" 
+                      max="100" 
+                      value="50" 
+                      step="1"
+                    >
+                    <div class="slider-track"></div>
+                  </div>
+                  
+                  <div class="axis-label">0</div>
+                </div>
+                
+                <!-- 散點圖容器 -->
+                <div id="scatter-plot-container" class="scatter-plot-area">
+                  <div class="grid-overlay"></div>
+                  <div class="origin-marker"></div>
+                  <canvas id="dataScatterPlot" class="scatter-canvas"></canvas>
+                  
+                  <!-- X 軸標籤 -->
+                  <div class="x-axis-labels">
+                    <span class="axis-label">0</span>
+                    <span class="axis-label">X</span>
+                    <span class="axis-label">1</span>
+                  </div>
+                  
+                  <!-- Y 軸標籤 -->
+                  <div class="y-axis-labels">
+                    <span class="axis-label">1</span>
+                    <span class="axis-label">Y</span>
+                    <span class="axis-label">0</span>
+                  </div>
+                  
+                  <!-- 點擊信息彈出（默認隱藏） -->
+                  <div id="point-info-popup" class="point-info-popup">
+                    <!-- 點擊信息將動態插入 -->
+                  </div>
                 </div>
               </div>
-            </article>
+            </div>
+          </article>
 
-            <!-- Chart + Stats -->
-            <div class="card flex-grow" style="flex: 1; display: flex; flex-direction: column; overflow: hidden;">
-              <div class="card-header py-sm shrink-0">
-                <h3 class="card-title text-lg">Topic Distribution</h3>
-              </div>
+          <!-- 圖表 + 統計 -佔用剩餘空間 -->
+          <div class="card flex-grow" style="flex: 1; display: flex; flex-direction: column; overflow: hidden;">
+            <div class="card-header py-sm shrink-0">
+              <h3 class="card-title text-lg">Topic Distribution</h3>
+            </div>
 
-              <div class="card-body p-sm flex-1">
-                <!-- Container: Chart with legend -->
-                <div class="flex h-full">
-                  <div id="chart-container" class="flex-grow border border-bg-secondary bg-secondary flex items-center justify-center p-sm">
-                    <canvas id="topicDistributionChart" class="w-full h-full"></canvas>
-                  </div>
-                  <div class="ml-sm flex flex-col justify-start">
-                    <h4 class="heading-tertiary text-sm mb-xs">Legend</h4>
-                    <ul class="text-xs">
-                      <li class="flex items-center mb-xs">
-                        <span class="inline-block w-3 h-3 bg-negative-light mr-xs"></span>Original
-                      </li>
-                      <li class="flex items-center">
-                        <span class="inline-block w-3 h-3 bg-positive-light mr-xs"></span>Current
-                      </li>
-                    </ul>
-                  </div>
+            <div class="card-body p-sm flex-1">
+              <div class="flex h-full">
+                <div id="chart-container" class="flex-grow border border-bg-secondary bg-secondary flex items-center justify-center p-sm">
+                  <canvas id="topicDistributionChart" class="w-full h-full"></canvas>
+                </div>
+                <div class="ml-sm flex flex-col justify-start">
+                  <h4 class="heading-tertiary text-sm mb-xs">圖例</h4>
+                  <ul class="text-xs">
+                    <li class="flex items-center mb-xs">
+                      <span class="inline-block w-3 h-3 bg-negative-light mr-xs"></span>原始
+                    </li>
+                    <li class="flex items-center">
+                      <span class="inline-block w-3 h-3 bg-positive-light mr-xs"></span>當前
+                    </li>
+                  </ul>
                 </div>
               </div>
             </div>
@@ -226,7 +267,6 @@
         </section>
       </main>
     </div>
-
     <!-- 先載入工具和服務 -->
     <script src="js/config.js"></script>
     <script src="js/utils/messages.js"></script>
@@ -243,6 +283,7 @@
     <script src="js/modules/familiarityControl.js"></script>
     <script src="js/modules/contentPreview.js"></script>
     <script src="js/modules/charts.js"></script>
+    <script src="js/modules/scatterPlot.js"></script>
 
     <!-- 最後載入應用入口點 -->
     <script src="js/main.js"></script>
