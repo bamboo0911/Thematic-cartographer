@@ -34,14 +34,14 @@
       <main class="flex flex-1 justify-center px-6 py-2 gap-4 overflow-hidden" role="main">
         <!-- Left Side: Control Panel - 100% 高度設計 -->
         <aside class="w-2/5 flex flex-col h-full">
-          <h2 class="heading-primary text-center my-2">Control Panel</h2>
+          <h2 class="heading-primary text-center my-2">Drag and Categorize</h2>
           
           <!-- 使用 flex 佈局容器包裝兩個主要區塊 -->
           <div class="flex flex-col flex-1">
             <!-- Topic Recommendation Section - 2/3 比例 -->
             <section class="card flex-grow mb-3" style="flex: 2; display: flex; flex-direction: column; overflow: hidden;">
               <div class="card-header py-sm shrink-0">
-                <h3 class="card-title text-lg">Topic Recommendation</h3>
+                <h3 class="card-title text-lg">Topics & Weights</h3>
               </div>
               
               <div class="p-sm shrink-0">
@@ -115,7 +115,7 @@
 <section class="card flex-grow" style="flex: 1; display: flex; flex-direction: column; overflow: hidden;">
   <!-- 標題和折疊按鈕 -->
   <div class="card-header py-sm shrink-0">
-    <h3 class="card-title text-lg">Familiarity Control</h3>
+    <h3 class="card-title text-lg">Topic Sets</h3>
     
     <div class="flex items-center gap-xs">
       <button id="confirmFamiliarity" class="btn-primary text-xs py-1 px-2">
@@ -180,12 +180,12 @@
 
         <!-- 右側：結果監控 -->
         <section class="w-3/5 flex flex-col h-full">
-          <h2 class="heading-primary text-center my-2">Result Monitor</h2>
+          <h2 class="heading-primary text-center my-2">Explore and Preview</h2>
 
           <!-- 內容預覽區域 - 與主題推薦高度匹配 -->
           <article class="card flex-grow mb-3" style="flex: 2; display: flex; flex-direction: column; overflow: hidden;">
             <div class="card-header py-sm shrink-0">
-              <h3 class="card-title text-lg">Content Preview</h3>
+              <h3 class="card-title text-lg">Familiarity-Estrangement Space</h3>
             </div>
 
             <div class="card-body p-sm flex-1">
@@ -241,25 +241,21 @@
 
           <!-- 圖表 + 統計 -佔用剩餘空間 -->
           <div class="card flex-grow" style="flex: 1; display: flex; flex-direction: column; overflow: hidden;">
-            <div class="card-header py-sm shrink-0">
+            <div class="card-header py-sm shrink-0 flex justify-between items-center">
               <h3 class="card-title text-lg">Topic Distribution</h3>
+              <div class="flex items-center text-xs">
+                <span class="inline-block w-3 h-3 bg-[#019863] opacity-70"></span>
+                <span style="margin-left: 6px; margin-right: 24px;">Original Text</span>
+                <span class="inline-block w-3 h-3 bg-[#A18249] opacity-70"></span>
+                <span style="margin-left: 6px;">Current Text</span>
+                <span style="margin-right: 12px;"></span>
+              </div>
             </div>
 
             <div class="card-body p-sm flex-1">
               <div class="flex h-full">
-                <div id="chart-container" class="flex-grow border border-bg-secondary bg-secondary flex items-center justify-center p-sm">
+                <div id="chart-container" class="w-full border border-bg-secondary bg-secondary flex items-center justify-center p-sm">
                   <canvas id="topicDistributionChart" class="w-full h-full"></canvas>
-                </div>
-                <div class="ml-sm flex flex-col justify-start">
-                  <h4 class="heading-tertiary text-sm mb-xs">圖例</h4>
-                  <ul class="text-xs">
-                    <li class="flex items-center mb-xs">
-                      <span class="inline-block w-3 h-3 bg-negative-light mr-xs"></span>原始
-                    </li>
-                    <li class="flex items-center">
-                      <span class="inline-block w-3 h-3 bg-positive-light mr-xs"></span>當前
-                    </li>
-                  </ul>
                 </div>
               </div>
             </div>
