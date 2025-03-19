@@ -23,4 +23,14 @@
   transition: box-shadow 0.2s ease, z-index 0s;
 }
 
+/* 拖拽效果 */
+.topic-item.drag-over {
+  border: 1px dashed var(--primary-color);
+  background-color: var(--bg-hover);
+}
+
+.category.drag-over {
+  box-shadow: 0 0 0 2px var(--primary-color);
+}
+
 /* 移除所有其他過渡和動畫效果 */

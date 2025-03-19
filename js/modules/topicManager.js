@@ -1,4 +1,4 @@
-// js/modules/topicManager.js
+// js/modules/topicManager.js - Updated with improved drag and drop support
 const TopicManager = {
   // 儲存主題列表
   topics: [],
@@ -29,7 +29,10 @@ const TopicManager = {
     
     const fragment = document.createDocumentFragment();
     
-    this.topics.forEach(topic => {
+    // 只渲染沒有被分類的主題
+    const unassignedTopics = this.topics.filter(topic => !topic.category);
+    
+    unassignedTopics.forEach(topic => {
       // 計算相關度等級 (1-5)
       const relevanceLevelA = this.getRelevanceLevel(topic.relevanceA);
       const relevanceLevelB = this.getRelevanceLevel(topic.relevanceB);
@@ -88,18 +91,45 @@ const TopicManager = {
     this.setupHoverEffects();
   },
   
+  // 設置主題項的懸停效果
+  setupHoverEffects() {
+    const topicItems = document.querySelectorAll('.topic-item');
+    topicItems.forEach(item => {
+      item.addEventListener('mouseenter', () => {
+        item.classList.add('hover:shadow-md');
+      });
+      
+      item.addEventListener('mouseleave', () => {
+        item.classList.remove('hover:shadow-md');
+      });
+    });
+  },
+  
   // 更新主題分類
   async updateTopicCategory(topicId, category) {
     try {
+      // 檢查主題目前的分類
+      const topic = this.topics.find(t => t.id === topicId);
+      const oldCategory = topic ? topic.category : null;
+      
+      // 如果是從一個分類移到另一個分類，先移除舊分類
+      if (oldCategory && oldCategory !== category) {
+        // 先從舊分類中移除
+        await DataService.updateTopicCategory(topicId, null);
+      }
+      
+      // 更新到新分類
       await DataService.updateTopicCategory(topicId, category);
       
       // 更新本地數據
-      const topic = this.topics.find(t => t.id === topicId);
       if (topic) {
         topic.category = category;
         
         // 通知其他模組
-        sendMessage('topic-updated', { topic, category });
+        sendMessage('topic-updated', { topic, oldCategory, newCategory: category });
+        
+        // 重新渲染主題列表（只顯示未分類的主題）
+        this.renderTopics();
       }
     } catch (error) {
       console.error('更新主題分類失敗:', error);
