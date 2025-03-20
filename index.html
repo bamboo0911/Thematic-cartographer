@@ -47,9 +47,9 @@
               <div class="p-sm shrink-0">
                 <!-- 標題列 -->
                 <div class="grid grid-cols-4 mb-xs">
-                  <div class="col-span-1 text-center text-xs">相關度 A</div>
-                  <div class="col-span-2 text-center text-xs">主題</div>
-                  <div class="col-span-1 text-center text-xs">相關度 B</div>
+                  <div class="col-span-1 text-center text-xs">Original Text</div>
+                  <div class="col-span-2 text-center text-xs font-bold">Weights</div>
+                  <div class="col-span-1 text-center text-xs">All Other Text</div>
                 </div>
                 
                 <!-- 相關度軸 - 階梯式設計 -->
@@ -137,7 +137,7 @@
       <!-- Anchor Topics -->
       <div id="maintain" class="category category-anchor col-span-3">
         <div class="category-header">
-          <h3 class="category-title">Anchor Topics</h3>
+          <h3 class="category-title">Familiarity Anchor</h3>
         </div>
         <div class="category-content">
           <!-- Topics will be added here dynamically -->
@@ -150,7 +150,7 @@
       <!-- Positive Topics -->
       <div id="strengthen" class="category category-positive col-span-4">
         <div class="category-header">
-          <h3 class="category-title">Positive Topics</h3>
+          <h3 class="category-title">Positive Estrangement</h3>
         </div>
         <div class="category-content">
           <!-- Topics will be added here dynamically -->
@@ -163,7 +163,7 @@
       <!-- Negative Topics -->
       <div id="weaken" class="category category-negative col-span-5">
         <div class="category-header">
-          <h3 class="category-title">Negative Topics</h3>
+          <h3 class="category-title">Negative Estrangement</h3>
         </div>
         <div class="category-content">
           <!-- Topics will be added here dynamically -->
@@ -190,9 +190,9 @@
 
             <div class="card-body p-sm flex-1">
               <div class="content-preview-container">
-                <!-- 垂直滑動器容器 -->
+                <!-- 垂直滑動器容器 - 更寬以容納 Familiarity 標籤 -->
                 <div id="vertical-scale-container" class="vertical-slider-container">
-                  <div class="axis-label">A</div>
+                  <div class="axis-label">Familiarity</div>
                   
                   <div class="slider-wrapper">
                     <input 
@@ -219,14 +219,14 @@
                   <!-- X 軸標籤 -->
                   <div class="x-axis-labels">
                     <span class="axis-label">0</span>
-                    <span class="axis-label">X</span>
+                    <span class="axis-label">Positively Estrange</span>
                     <span class="axis-label">1</span>
                   </div>
                   
                   <!-- Y 軸標籤 -->
                   <div class="y-axis-labels">
                     <span class="axis-label">1</span>
-                    <span class="axis-label">Y</span>
+                    <span class="axis-label">Negatively Estrange</span>
                     <span class="axis-label">0</span>
                   </div>
                   

@@ -35,7 +35,7 @@ const Charts = {
     if (chartContainer) {
       // 移除邊框並設定適當高度
       chartContainer.style.border = 'none';
-      chartContainer.style.height = '140px'; // 增加高度以利用更多空間
+      chartContainer.style.height = '160px'; // 增加高度以利用更多空間
       chartContainer.style.background = 'transparent';
       chartContainer.style.padding = '0';
       chartContainer.classList.remove('border');

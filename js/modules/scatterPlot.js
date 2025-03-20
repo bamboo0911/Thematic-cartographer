@@ -1,4 +1,4 @@
-// js/modules/scatterPlot.js - Fixed version with TypeScript compatibility
+// js/modules/scatterPlot.js - Updated with gray dots
 const ScatterPlot = {
     // Chart instance
     chart: null,
@@ -9,12 +9,12 @@ const ScatterPlot = {
     // Current A value (0-1)
     currentA: 0.5,
     
-    // Chart colors - Using direct values for better compatibility
+    // Chart colors - Updated to use gray
     colors: {
-      pointColor: 'rgba(96, 150, 211, 0.7)',       // Positive color - only this will be used
-      pointBorderColor: 'rgba(96, 150, 211, 1)',   // Positive color (darker)
-      gridColor: 'rgba(28, 22, 12, 0.1)',          // Primary lighter
-      axisColor: 'rgba(28, 22, 12, 0.8)'           // Primary light
+      pointColor: 'rgba(128, 128, 128, 0.7)',       // Gray color for dots
+      pointBorderColor: 'rgba(100, 100, 100, 1)',   // Darker gray for borders
+      gridColor: 'rgba(28, 22, 12, 0.1)',           // Primary lighter
+      axisColor: 'rgba(28, 22, 12, 0.8)'            // Primary light
     },
     
     // Initialize the module
@@ -374,4 +374,4 @@ const ScatterPlot = {
     updateChart: function() {
       this.filterDataByA();
     }
-  };
+};
