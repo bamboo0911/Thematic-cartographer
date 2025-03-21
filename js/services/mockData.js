@@ -2,51 +2,99 @@
 const mockData = {
     // 模擬主題數據
     topics: [
-      { 
-        id: '1', 
-        title: 'Machine Learning', 
-        relevanceA: 0.7, 
-        relevanceB: 0.6, 
+      {
+        id: '1',
+        title: 'Researching complex magical knowledge in cities',
+        relevanceA: 0.8,
+        relevanceB: 0.6,
         category: null,
-        weight: 30
+        weight: 35
       },
-      { 
+      {
         id: '2', 
-        title: 'Data Analysis', 
-        relevanceA: 0.5, 
-        relevanceB: 0.8, 
-        category: null,
-        weight: 45
-      },
-      { 
-        id: '3', 
-        title: 'Deep Learning', 
-        relevanceA: 0.9, 
-        relevanceB: 0.3, 
-        category: null,
-        weight: 15
-      },
-      { 
-        id: '4', 
-        title: 'Neural Networks', 
-        relevanceA: 0.4, 
-        relevanceB: 0.7, 
+        title: 'Successful trade in a bustling market',
+        relevanceA: 0.6,
+        relevanceB: 0.9,
         category: null,
         weight: 40
       },
-      { 
-        id: '5', 
-        title: 'Big Data Analytics', 
-        relevanceA: 0.2, 
-        relevanceB: 0.9, 
+      {
+        id: '3',
+        title: 'Seeking Balance and Wisdom in Nature',
+        relevanceA: 0.7,
+        relevanceB: 0.7,
+        category: null,
+        weight: 30
+      },
+      {
+        id: '4',
+        title: 'Exploring and sharing ancient historical secrets',
+        relevanceA: 0.9,
+        relevanceB: 0.5,
+        category: null,
+        weight: 45
+      },
+      {
+        id: '5',
+        title: 'Seeking guidance to improve skills and combat challenges',
+        relevanceA: 0.5,
+        relevanceB: 0.8,
+        category: null,
+        weight: 25
+      },
+      {
+        id: '6',
+        title: 'Innovative Engineering and Crafting Skills',
+        relevanceA: 0.7,
+        relevanceB: 0.6,
+        category: null,
+        weight: 35
+      },
+      {
+        id: '7',
+        title: 'Exploring Ancient Mysteries and Universal Wisdom',
+        relevanceA: 0.8,
+        relevanceB: 0.4,
+        category: null,
+        weight: 30
+      },
+      {
+        id: '8',
+        title: 'City-based RPG gameplay and interactions',
+        relevanceA: 0.6,
+        relevanceB: 0.7,
+        category: null,
+        weight: 40
+      },
+      {
+        id: '9',
+        title: 'Mystical Art and Beauty in Night',
+        relevanceA: 0.7,
+        relevanceB: 0.5,
+        category: null,
+        weight: 25
+      },
+      {
+        id: '10',
+        title: 'Describing Individual\'s Physical Traits & Interactions',
+        relevanceA: 0.5,
+        relevanceB: 0.6,
         category: null,
         weight: 20
       },
-      { 
-        id: '6', 
-        title: 'Computer Vision', 
-        relevanceA: 0.8, 
-        relevanceB: 0.4, 
+      {
+        id: '11',
+        title: 'Sharing unique, warm experiences and traditional recipes',
+        relevanceA: 0.4,
+        relevanceB: 0.8,
+        category: null,
+        weight: 30
+      },
+      {
+        id: '12',
+        title: 'Exclusive Fashion Design and Creation',
+        relevanceA: 0.6,
+        relevanceB: 0.7,
         category: null,
         weight: 35
       }
