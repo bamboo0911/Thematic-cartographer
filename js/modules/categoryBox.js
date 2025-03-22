@@ -1,59 +1,53 @@
-// js/modules/categoryBox.js - Enhanced version
+// js/modules/categoryBox.js - Updated version for vertical topic display
 const CategoryBox = {
-  // 分類容器
+  // Category containers
   containers: {},
   
-  // 初始化
+  // Initialize
   init() {
-    // 獲取分類容器
+    // Get category containers
     this.containers = {
       anchor: document.getElementById('maintain'),
       positive: document.getElementById('strengthen'), 
       negative: document.getElementById('weaken')
     };
     
-    // 設置拖放區域 - 優化版
+    // Set up enhanced drop zones
     this.setupEnhancedDropZones();
     
-    // 監聽主題更新事件
+    // Listen for topic update events
     listenForMessage('topics-loaded', this.renderTopicsEnhanced.bind(this));
     listenForMessage('topic-updated', (data) => {
-      // 處理主題類別變更
+      // Handle topic category changes
       this.handleTopicCategoryChange(data);
     });
+    
+    // Initial render of categories
+    this.renderTopicsEnhanced();
     
     return this;
   },
   
-  // 設置優化的拖放區域
+  // Set up enhanced drop zones
   setupEnhancedDropZones() {
     Object.entries(this.containers).forEach(([category, container]) => {
-      // 使用DragDrop工具設置拖放區域
+      // Use DragDrop utility to set up drop zones
       DragDrop.initDropZone(container, (data) => {
-        // 當主題被拖入時更新類別
+        // Update topic category when dropped
         TopicManager.updateTopicCategory(data.id, category);
       });
       
-      // 設置滑鼠懸停顯示內容
-      container.addEventListener('mouseenter', () => {
-        const contentEl = container.querySelector('.category-content');
-        if (contentEl) {
-          contentEl.style.display = 'block';
-        }
-      });
-      
-      container.addEventListener('mouseleave', () => {
-        const contentEl = container.querySelector('.category-content');
-        if (contentEl) {
-          contentEl.style.display = 'none';
-        }
-      });
+      // Make sure content sections are always visible
+      const contentEl = container.querySelector('.category-content');
+      if (contentEl) {
+        contentEl.style.display = 'block';
+      }
     });
   },
   
-  // 處理主題類別變更
+  // Handle topic category changes
   handleTopicCategoryChange(data) {
-    // 更新舊類別和新類別的顯示
+    // Update old and new category displays
     if (data.oldCategory && this.containers[data.oldCategory]) {
       this.updateCategoryDisplay(data.oldCategory);
     }
@@ -62,34 +56,34 @@ const CategoryBox = {
       this.updateCategoryDisplay(data.newCategory);
     }
     
-    // 如果沒有類別（被重置），則更新所有容器
+    // If no category (reset), update all containers
     if (!data.oldCategory && !data.newCategory) {
       this.renderTopicsEnhanced();
     }
   },
   
-  // 更新特定類別的顯示
+  // Update specific category display
   updateCategoryDisplay(category) {
     const container = this.containers[category];
     if (!container) return;
     
-    // 獲取該類別的主題
+    // Get topics for this category
     const topics = TopicManager.getTopicsByCategory(category);
     
-    // 獲取主題容器並清空
+    // Get and clear the content element
     const contentEl = container.querySelector('.category-content');
     if (contentEl) {
       DomUtils.clearElement(contentEl);
       
-      // 添加主題標籤 - 使用更簡潔的樣式
+      // Add topic tags with vertical layout
       if (topics.length > 0) {
         const fragment = document.createDocumentFragment();
         topics.forEach(topic => {
-          const topicTag = document.createElement('span');
+          const topicTag = document.createElement('div'); // Use div for block display
           topicTag.className = 'topic-tag';
           topicTag.textContent = topic.title;
           
-          // 添加移除功能 - 點擊標籤移除分類
+          // Add remove functionality - click tag to remove classification
           topicTag.addEventListener('click', (e) => {
             e.stopPropagation();
             TopicManager.updateTopicCategory(topic.id, null);
@@ -101,14 +95,14 @@ const CategoryBox = {
       }
     }
     
-    // 更新計數器
+    // Update counter
     const counter = container.querySelector('.topic-count');
     if (counter) {
       counter.textContent = topics.length;
     }
   },
   
-  // 渲染各類別中的主題 - 優化版
+  // Render topics in all categories - enhanced version
   renderTopicsEnhanced() {
     Object.entries(this.containers).forEach(([category, container]) => {
       this.updateCategoryDisplay(category);

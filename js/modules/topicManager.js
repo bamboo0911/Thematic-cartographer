@@ -89,6 +89,9 @@ const TopicManager = {
     
     // 設置懸停效果
     this.setupHoverEffects();
+    
+    // 確保適當的高度管理
+    this.ensureFixedHeight();
   },
   
   // 設置主題項的懸停效果
@@ -103,6 +106,40 @@ const TopicManager = {
         item.classList.remove('hover:shadow-md');
       });
     });
+  },
+  
+  // 確保固定高度
+  ensureFixedHeight() {
+    // 獲取容器及其父元素
+    const container = document.querySelector('#topics-list-container');
+    if (!container) return;
+    
+    const parentCard = container.closest('section.card');
+    if (!parentCard) return;
+    
+    // 根據父卡片計算理想高度
+    const headerHeight = parentCard.querySelector('.card-header')?.offsetHeight || 0;
+    const controlsHeight = parentCard.querySelector('.p-sm')?.offsetHeight || 0;
+    const padding = 24; // 考慮內邊距和外邊距
+    
+    // 計算主題列表的可用高度
+    const availableHeight = parentCard.offsetHeight - headerHeight - controlsHeight - padding;
+    
+    // 設置最大高度限制
+    const maxHeight = Math.min(availableHeight, 400); // 限制最大高度為400px
+    
+    // 應用高度限制
+    container.style.maxHeight = `${maxHeight}px`;
+    
+    // 確保父級佈局保持不變
+    parentCard.style.minHeight = '0';
+    
+    // 確保保持可滾動性
+    if (container.scrollHeight > container.clientHeight) {
+      container.classList.add('has-overflow');
+    } else {
+      container.classList.remove('has-overflow');
+    }
   },
   
   // 更新主題分類

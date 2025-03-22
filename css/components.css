@@ -91,19 +91,54 @@ main {
   flex: 1;
   overflow-y: auto;
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+  max-height: calc(100% - 120px); /* 設定最大高度 */
+  height: 100%; /* 填滿可用空間 */
 }
 
-/* 主題項目樣式 - 更加緊湊 */
+/* 確保主題列表的父容器不會超出可用空間 */
+section.card[style*="flex: 2"] {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+section.card[style*="flex: 2"] > .card-header,
+section.card[style*="flex: 2"] > .p-sm {
+  flex-shrink: 0; /* 不允許這些元素縮小 */
+}
+
+/* 調整主題項目以更好地適應有限空間 */
 .topic-item {
   background-color: rgba(255, 255, 255, 0.85);
   border-radius: 0.25rem;
-  height: 1.8rem;
-  margin-bottom: 0.25rem;
+  height: 1.7rem; /* 稍微減少高度 */
+  margin-bottom: 0.2rem; /* 減少項目間距 */
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   align-items: center;
   transition: all 0.2s ease;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+}
+
+/* 確保標題保持緊湊 */
+#topics-list-container h4 {
+  margin-bottom: 0.3rem;
+  font-size: 0.8rem;
+}
+
+/* 添加微妙的指示器，當列表可滾動時 */
+#topics-list-container::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 10px;
+  background: linear-gradient(to top, var(--bg-secondary), transparent);
+  pointer-events: none;
+  opacity: 0.7;
+  border-radius: 0 0 0.25rem 0.25rem;
+  z-index: 5;
 }
 
 .topic-item:last-child {
@@ -186,7 +221,7 @@ main {
 
 .category {
   position: relative;
-  min-height: 2.5rem;
+  min-height: 4rem; /* 確保最小高度以顯示內容 */
   height: auto;
   border-radius: 0.25rem;
   border: 1px solid;
@@ -202,32 +237,33 @@ main {
 }
 
 .category-content {
-  display: none;
-  white-space: nowrap;
-  overflow-x: auto;
-  overflow-y: hidden;
+  display: block !important; /* 始終顯示內容 */
+  white-space: normal; /* 允許文字換行 */
+  overflow-y: auto; /* 垂直滾動 */
+  overflow-x: hidden; /* 隱藏水平溢出 */
   padding: 0.25rem 0.5rem;
   background-color: rgba(255, 255, 255, 0.3);
+  max-height: 8rem; /* 限制最大高度並啟用滾動 */
 }
 
 .category:hover .category-content {
   display: block;
-  max-height: 2.5rem;
+  max-height: 8rem;
 }
 
 /* 自定義水平捲軸樣式 */
 .category-content::-webkit-scrollbar {
-  height: 3px;
+  width: 4px;
 }
 
 .category-content::-webkit-scrollbar-track {
   background: rgba(0, 0, 0, 0.05);
-  border-radius: 1.5px;
+  border-radius: 2px;
 }
 
 .category-content::-webkit-scrollbar-thumb {
   background: rgba(0, 0, 0, 0.15);
-  border-radius: 1.5px;
+  border-radius: 2px;
 }
 
 .category-content::-webkit-scrollbar-thumb:hover {
@@ -275,6 +311,12 @@ main {
   color: var(--negative-color);
 }
 
+.category-counter-wrapper {
+  position: absolute;
+  bottom: 0.25rem;
+  right: 0.25rem;
+}
+
 .category-counter {
   position: absolute;
   bottom: 0.25rem;
@@ -298,15 +340,17 @@ main {
   color: var(--negative-color);
 }
 
-/* 主題標籤樣式 - 更緊湊水平排列 */
+/* 主題標籤樣式 - 垂直排列 */
 .topic-tag {
-  display: inline-block;
-  padding: 0.1rem 0.25rem;
-  margin: 0.1rem;
+  display: block; /* 垂直堆疊 */
+  padding: 0.15rem 0.4rem;
+  margin: 0.15rem 0;
   background-color: rgba(255, 255, 255, 0.9);
-  border-radius: 0.2rem;
-  font-size: 0.65rem;
-  white-space: nowrap;
+  border-radius: 0.25rem;
+  font-size: 0.7rem;
+  white-space: normal; /* 允許換行 */
+  text-overflow: ellipsis;
+  overflow: hidden;
   cursor: pointer;
   transition: all 0.2s ease;
   border: 1px solid rgba(0, 0, 0, 0.05);
