@@ -1,0 +1,82 @@
+{
+  "Topic_0": {
+    "description": "\"Unique Art in Cultural Traditions\"",
+    "original_weight": 0.045292843133211136,
+    "average_weight": 0.08348729752636204
+  },
+  "Topic_1": {
+    "description": "\"Strategic Trading and Business Opportunities\"",
+    "original_weight": 0.0,
+    "average_weight": 0.028805557746132526
+  },
+  "Topic_2": {
+    "description": "\"Cooking techniques and recipe diversity\"",
+    "original_weight": 0.0,
+    "average_weight": 0.021702558891537126
+  },
+  "Topic_3": {
+    "description": "\"City life interactions and appearances\"",
+    "original_weight": 0.0,
+    "average_weight": 0.13126813027738554
+  },
+  "Topic_4": {
+    "description": "\"Artistic Creativity and Diversity in Society\"",
+    "original_weight": 0.08210154622793198,
+    "average_weight": 0.06412647889020852
+  },
+  "Topic_5": {
+    "description": "\"Latest Innovations in Engineering and Gadgets\"",
+    "original_weight": 0.0,
+    "average_weight": 0.05466488561661526
+  },
+  "Topic_6": {
+    "description": "\"Magical combat skills and powerful alliances\"",
+    "original_weight": 0.0,
+    "average_weight": 0.03894559645043196
+  },
+  "Topic_7": {
+    "description": "\"Uncovering ancient knowledge and secrets\"",
+    "original_weight": 0.0,
+    "average_weight": 0.037354634500608094
+  },
+  "Topic_8": {
+    "description": "\"Exploring ancient, mystical wisdom and universal mysteries\"",
+    "original_weight": 0.17198462784290314,
+    "average_weight": 0.06284031248392608
+  },
+  "Topic_9": {
+    "description": "\"Guidance in navigating complex racial world\"",
+    "original_weight": 0.0,
+    "average_weight": 0.08157703906762112
+  },
+  "Topic_10": {
+    "description": "\"Worldwide sharing of diverse adventure stories\"",
+    "original_weight": 0.22953838109970093,
+    "average_weight": 0.1616718366433008
+  },
+  "Topic_11": {
+    "description": "\"Unique, playful music performances with humor\"",
+    "original_weight": 0.0,
+    "average_weight": 0.018505413500102045
+  },
+  "Topic_12": {
+    "description": "\"Describing an adorned, stylish individual\"",
+    "original_weight": 0.0,
+    "average_weight": 0.039924311708479474
+  },
+  "Topic_13": {
+    "description": "\"Latest custom fashion designs and trends\"",
+    "original_weight": 0.0,
+    "average_weight": 0.016740165751174985
+  },
+  "Topic_14": {
+    "description": "\"Photography capturing beauty and essence\"",
+    "original_weight": 0.0,
+    "average_weight": 0.005903238503340298
+  },
+  "Topic_15": {
+    "description": "\"Seeking wisdom and balance in nature\"",
+    "original_weight": 0.44693395495414734,
+    "average_weight": 0.13699138295467472
+  }
+}
